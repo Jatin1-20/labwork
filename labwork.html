@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 50%;
+            border: 3px solid black; /* Thick border outside the table */
+        }
+    </style>
+</head>
+<body>
+    <table id="X">
+        <tr>
+            <td>row1 column1</td>
+            <td>row1 column2</td>
+        </tr>
+        <tr>
+            <td>row2 column1</td>
+            <td>row2 column2</td>
+        </tr>
+        <tr>
+            <td>row3 column1</td>
+            <td>row3 column2</td>
+        </tr>
+        <tr>
+            <td>row4 column1</td>
+            <td>row4 column2</td>
+        </tr>
+        <tr>
+            <td>row5 column1</td>
+            <td>row5 column2</td>
+        </tr>
+    </table>
+    <button onclick="insertRow()"><b>Insert row</b></button>
+    <button onclick="deleteRowFromBottom()"><b>Delete row from bottom</b></button>
+    <button onclick="deleteRowFromTop()"><b>Delete row from top</b></button>
+    <p id="messageLabel" style="display: none">Message: No more rows to delete</p>
+
+    <script>
+        var counter = 6;
+
+        function insertRow() {
+            var table = document.getElementById("X");
+            var row = table.insertRow(-1);
+
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML = "row" + counter + " column1";
+
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = "row" + counter + " column2";
+
+            counter++;
+            updateMessage();
+        }
+
+        function deleteRowFromBottom() {
+            var table = document.getElementById("X");
+
+            if (table.rows.length > 0) {
+                table.deleteRow(table.rows.length - 1);
+                updateMessage();
+            }
+        }
+
+        function deleteRowFromTop() {
+            var table = document.getElementById("X");
+
+            if (table.rows.length > 0) {
+                table.deleteRow(0); // Delete the first row (top row)
+                updateMessage();
+            }
+        }
+
+        function updateMessage() {
+            var messageLabel = document.getElementById("messageLabel");
+            messageLabel.style.display = (document.getElementById("X").rows.length === 0) ? "block" : "none";
+        }
+    </script>
+    </body>
+    </html>
+    
